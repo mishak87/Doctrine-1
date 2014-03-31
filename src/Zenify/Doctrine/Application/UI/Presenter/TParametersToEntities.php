@@ -9,9 +9,8 @@
  * the file license.md that was distributed with this source code.
  */
 
-namespace Zenify\Doctrine;
+namespace Zenify\Doctrine\Application\UI\Presenter;
 
-use Nette;
 use Nette\Application\BadRequestException;
 use Nette\Reflection\ClassType;
 use Nette\Utils\Strings;
@@ -19,6 +18,9 @@ use Nette\Utils\Strings;
 
 trait TParametersToEntities
 {
+	/** @inject @var Nette\DI\Container */
+	public $container;
+
 	/** @inject @var Kdyby\Doctrine\EntityManager */
 	public $entityManager;
 
@@ -83,7 +85,7 @@ trait TParametersToEntities
 			throw new BadRequestException("Value '$id' not found in collection '$entityName'.");
 		}
 
-		$this->context->callInjects($entity);
+		$this->container->callInjects($entity);
 		return $entity;
 	}
 

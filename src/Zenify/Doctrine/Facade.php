@@ -11,8 +11,8 @@
 
 namespace Zenify\Doctrine;
 
-use Kdyby\Doctrine\EntityDao;
 use Kdyby\Doctrine\Entities\BaseEntity;
+use Kdyby\Doctrine\EntityDao;
 use Nette;
 
 
@@ -82,7 +82,6 @@ abstract class Facade extends Nette\Object
 
 		$this->dao->delete($entity);
 	}
-
 
 
 	/**
