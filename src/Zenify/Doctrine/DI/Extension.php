@@ -24,7 +24,8 @@ class Extension extends CompilerExtension
 			->addExtension('console', new Kdyby\Console\DI\ConsoleExtension)
 			->addExtension('doctrine', new Kdyby\Doctrine\DI\OrmExtension)
 			->addExtension('events', new Kdyby\Events\DI\EventsExtension)
-			->addExtension('kdybyforms', new Kdyby\DoctrineForms\DI\FormsExtension);
+			->addExtension('kdybyforms', new Kdyby\DoctrineForms\DI\FormsExtension)
+			->addExtension('validator', new Kdyby\Validator\DI\ValidatorExtension);
 	}
 
 }
