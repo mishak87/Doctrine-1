@@ -1,0 +1,22 @@
+{
+	"name": "zenify/doctrine",
+	"description": "Doctrine tools for Zenify Framework",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Tomáš Votruba",
+			"homepage": "http://tomasvotruba.cz"
+		}
+	],
+	"require": {
+		"php": ">=5.4",
+		"nette/nette": "@dev",
+		"kdyby/doctrine": "@dev",
+		"kdyby/doctrine-forms": "@dev"
+	},
+	"autoload": {
+		"psr-0": {
+			"Zenify\\": "src/"
+		}
+	}
+}
