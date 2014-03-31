@@ -1,6 +1,6 @@
 {
 	"name": "zenify/doctrine",
-	"description": "Doctrine tools for Zenify Framework",
+	"description": "Doctrine tools above Kdyby\\Doctrine",
 	"license": "MIT",
 	"authors": [
 		{
