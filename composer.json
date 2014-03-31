@@ -12,7 +12,8 @@
 		"php": ">=5.4",
 		"nette/nette": "@dev",
 		"kdyby/doctrine": "@dev",
-		"kdyby/doctrine-forms": "@dev"
+		"kdyby/doctrine-forms": "@dev",
+		"kdyby/validator": "@dev"
 	},
 	"autoload": {
 		"psr-0": {

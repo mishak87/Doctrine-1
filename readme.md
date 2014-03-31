@@ -7,6 +7,7 @@ This package requires PHP 5.4.
 
 - [Kdyby\Doctrine](http://github.com/kdyby/doctrine)
 - [Kdyby\DoctrineForms](http://github.com/kdyby/doctrineforms)
+- [Kdyby\Validator](http://github.com/kdyby/validator)
 
 
 ## Installation
