@@ -13,6 +13,7 @@ namespace Zenify\Doctrine\DI;
 
 use Kdyby;
 use Nette\DI\CompilerExtension;
+use Nette\DI\ServiceDefinition;
 
 
 class Extension extends CompilerExtension
@@ -26,6 +27,33 @@ class Extension extends CompilerExtension
 			->addExtension('events', new Kdyby\Events\DI\EventsExtension)
 			->addExtension('kdybyforms', new Kdyby\DoctrineForms\DI\FormsExtension)
 			->addExtension('validator', new Kdyby\Validator\DI\ValidatorExtension);
+	}
+
+
+	public function beforeCompile()
+	{
+		// @move to onDaoCreate?
+		$builder = $this->containerBuilder;
+		foreach ($builder->definitions as $definition) {
+			if ($this->isDaoDefinition($definition)) {
+				$definition->setInject(TRUE);
+			}
+		}
+	}
+
+
+	/**
+	 * @return bool
+	 */
+	private function isDaoDefinition(ServiceDefinition $definition)
+	{
+		if ($definition->factory && isset($definition->factory->arguments[0])
+			&& $definition->factory->arguments[0] instanceof Nette\DI\Statement
+			&& $definition->factory->arguments[0]->entity == '@doctrine.dao') {
+				return TRUE;
+		}
+
+		return FALSE;
 	}
 
 }
