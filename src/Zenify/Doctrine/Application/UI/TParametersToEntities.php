@@ -9,7 +9,7 @@
  * the file license.md that was distributed with this source code.
  */
 
-namespace Zenify\Doctrine\Application\UI\Presenter;
+namespace Zenify\Doctrine\Application\UI;
 
 use Nette\Application\BadRequestException;
 use Nette\Reflection\ClassType;
