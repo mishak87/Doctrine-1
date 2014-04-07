@@ -34,7 +34,7 @@ abstract class Facade extends Nette\Object
 
 	/**
 	 * @param  string
-	 * @param  strin[]
+	 * @param  string[]
 	 * @return mixed
 	 */
 	public function __call($name, $args = [])
