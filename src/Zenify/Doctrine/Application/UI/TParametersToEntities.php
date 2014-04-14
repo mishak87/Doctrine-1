@@ -2,11 +2,7 @@
 
 /**
  * This file is part of Zenify
- *
  * Copyright (c) 2012 Tomas Votruba (http://tomasvotruba.cz)
- *
- * For the full copyright and license information, please view
- * the file license.md that was distributed with this source code.
  */
 
 namespace Zenify\Doctrine\Application\UI;
@@ -14,15 +10,22 @@ namespace Zenify\Doctrine\Application\UI;
 use Nette\Application\BadRequestException;
 use Nette\Reflection\ClassType;
 use Nette\Utils\Strings;
+use Kdyby;
 
 
 trait TParametersToEntities
 {
-	/** @inject @var Nette\DI\Container */
+	/** @inject @var \Nette\DI\Container */
 	public $container;
 
-	/** @inject @var Kdyby\Doctrine\EntityManager */
-	public $entityManager;
+	/** @var Kdyby\Doctrine\EntityManager */
+	private $entityManager;
+
+
+	public function injectEntityManager(Kdyby\Doctrine\EntityManager $entityManager = NULL)
+	{
+		$this->entityManager = $entityManager;
+	}
 
 
 	/**
