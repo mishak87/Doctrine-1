@@ -8,12 +8,18 @@
 namespace Zenify\Doctrine\DI;
 
 use Kdyby;
-use Nette\DI\CompilerExtension;
+use Nette;
 use Nette\DI\ServiceDefinition;
+use Nette\Utils\Validators;
 
 
-class Extension extends CompilerExtension
+class Extension extends Nette\DI\CompilerExtension
 {
+	/** @var [] */
+	private $defaults = [
+		'userEntity' => 'App\Entities\User'
+	];
+
 
 	public function loadConfiguration()
 	{
@@ -23,33 +29,18 @@ class Extension extends CompilerExtension
 			->addExtension('doctrineforms', new Kdyby\DoctrineForms\DI\FormsExtension)
 			->addExtension('events', new Kdyby\Events\DI\EventsExtension)
 			->addExtension('validator', new Kdyby\Validator\DI\ValidatorExtension);
-	}
 
+		$config = $this->getConfig($this->defaults);
+		$builder = $this->getContainerBuilder();
 
-	public function beforeCompile()
-	{
-		// @move to onDaoCreate?
-		$builder = $this->containerBuilder;
-		foreach ($builder->definitions as $definition) {
-			if ($this->isDaoDefinition($definition)) {
-				$definition->setInject(TRUE);
-			}
-		}
-	}
+		Validators::assert($config['userEntity'], 'string');
+		$builder->getDefinition('nette.userStorage')
+			->setClass('Zenify\Doctrine\Http\UserStorage')
+			->addSetup('setEntity', [$config['userEntity']]);
 
-
-	/**
-	 * @return bool
-	 */
-	private function isDaoDefinition(ServiceDefinition $definition)
-	{
-		if ($definition->factory && isset($definition->factory->arguments[0])
-			&& $definition->factory->arguments[0] instanceof Nette\DI\Statement
-			&& $definition->factory->arguments[0]->entity == '@doctrine.dao') {
-				return TRUE;
-		}
-
-		return FALSE;
+		$builder->addDefinition($this->prefix('inject.dao.event'))
+			->setClass('Zenify\Doctrine\Events\CallInjectOnDaoCreate')
+			->addTag(Kdyby\Events\DI\EventsExtension::TAG_SUBSCRIBER);
 	}
 
 }

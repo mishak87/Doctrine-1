@@ -5,25 +5,28 @@
  * Copyright (c) 2012 Tomas Votruba (http://tomasvotruba.cz)
  */
 
-namespace Zenify\Doctrine\Application\UI;
+namespace Zenify\Doctrine\Application;
 
 use Nette\Application\BadRequestException;
 use Nette\Reflection\ClassType;
 use Nette\Utils\Strings;
+use Nette\DI\Container;
 use Kdyby;
+use Kdyby\Doctrine\EntityManager;
 
 
 trait TParametersToEntities
 {
-	/** @inject @var \Nette\DI\Container */
-	public $container;
+	/** @var Container */
+	private $container;
 
-	/** @var Kdyby\Doctrine\EntityManager */
+	/** @var EntityManager */
 	private $entityManager;
 
 
-	public function injectEntityManager(Kdyby\Doctrine\EntityManager $entityManager = NULL)
+	public function injectParametrToEntities(Container $container, EntityManager $entityManager = NULL)
 	{
+		$this->container = $container;
 		$this->entityManager = $entityManager;
 	}
 
@@ -82,14 +85,42 @@ trait TParametersToEntities
 	 */
 	private function findById($entityName, $id)
 	{
-		$entity = $this->entityManager->find($entityName, $id);
+		$entity = $this->getEntityManager()->find($entityName, $id);
 
 		if ($entity == NULL) {
 			throw new BadRequestException("Value '$id' not found in collection '$entityName'.");
 		}
 
-		$this->container->callInjects($entity);
+		$this->getContainer()->callInjects($entity);
 		return $entity;
+	}
+
+
+	/**
+	 * @return EntityManager
+	 */
+	public function getEntityManager()
+	{
+		if ($this->entityManager == NULL && $this->parent) {
+			if ($em = $this->parent->context->getByType('Kdyby\Doctrine\EntityManager')) {
+				$this->entityManager = $em;
+			}
+		}
+
+		return $this->entityManager;
+	}
+
+
+	/**
+	 * @return Container|SystemContainer
+	 */
+	public function getContainer()
+	{
+		if ($this->container == NULL) {
+			$this->container = $this->presenter->getContext();
+		}
+
+		return $this->container;
 	}
 
 }
