@@ -8,8 +8,9 @@ See section `require` in [composer.json](composer.json).
 
 ## Installation
 
-The best way to install is using [Composer](http://getcomposer.org/):
-Add to `composer.json`:
+The best way to install is using [Composer](http://getcomposer.org/).
+
+Add to your `composer.json`:
 
 ```yaml
 "require": {
@@ -17,6 +18,7 @@ Add to `composer.json`:
         "kdyby/doctrine-forms": "@dev",
         "kdyby/validator": "@dev"
 }
+```
 
 ```sh
 $ composer update
