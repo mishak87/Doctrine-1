@@ -45,7 +45,7 @@ trait TParametersToEntities
 				$this->checkRequirements($rm);
 				$args = $rc->combineArgs($rm, $parameters);
 
-				if (Strings::match($method, '~^(action|render|handle).+~')) {
+				if (preg_match('~^(action|render|handle).+~', $method)) {
 					$args = $this->replaceParametersByEntity($rm->parameters, $args);
 				}
 
