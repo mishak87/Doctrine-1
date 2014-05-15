@@ -12,7 +12,8 @@
 		"php": ">=5.4",
 		"nette/http": "~2.2",
 		"kdyby/doctrine": "~2.0",
-		"kdyby/doctrine-forms": "dev-master"
+		"kdyby/doctrine-forms": "@dev",
+		"kdyby/validator": "@dev"
 	},
 	"autoload": {
 		"psr-0": {
