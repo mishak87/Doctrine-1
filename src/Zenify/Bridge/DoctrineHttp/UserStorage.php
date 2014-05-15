@@ -5,27 +5,23 @@
  * Copyright (c) 2012 Tomas Votruba (http://tomasvotruba.cz)
  */
 
-namespace Zenify\Bridge\HttpDoctrine;
+namespace Zenify\Bridge\DoctrineHttp;
 
-use Doctrine\ORM\EntityManager;
+use Kdyby;
 use Nette;
-use Nette\Http\Session;
 
 
+/**
+ * @method setEntity()
+ * @method setEntityManager()
+ */
 class UserStorage extends Nette\Http\UserStorage
 {
 	/** @var string */
 	private $entity;
 
-	/** @var EntityManager */
+	/** @var Kdyby\Doctrine\EntityManager */
 	private $entityManager;
-
-
-	public function  __construct(Session $session, EntityManager $entityManager)
-	{
-		parent::__construct($session);
-		$this->entityManager = $entityManager;
-	}
 
 
 	/**
@@ -39,12 +35,6 @@ class UserStorage extends Nette\Http\UserStorage
 		}
 
 		return $identity;
-	}
-
-
-	public function setEntity($entity)
-	{
-		$this->entity = $entity;
 	}
 
 }

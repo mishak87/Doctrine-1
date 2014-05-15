@@ -34,8 +34,12 @@ class Extension extends Nette\DI\CompilerExtension
 
 		Validators::assert($config['userEntity'], 'string');
 		$builder->getDefinition('nette.userStorage')
-			->setClass('Zenify\Doctrine\Http\UserStorage')
-			->addSetup('setEntity', [$config['userEntity']]);
+			->setClass('Zenify\Bridge\DoctrineHttp\UserStorage')
+			->addSetup('setEntity', [$config['userEntity']])
+			->addSetup('setEntityManager', ['@Kdyby\Doctrine\EntityManager']);
+
+		$builder->addDefinition($this->prefix('parametersToEntities'))
+			->setClass('Zenify\Doctrine\Application\ParametersToEntities');
 	}
 
 }
