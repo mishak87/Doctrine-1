@@ -9,7 +9,6 @@ namespace Zenify\Doctrine\DI;
 
 use Kdyby;
 use Nette;
-use Nette\DI\ServiceDefinition;
 use Nette\Utils\Validators;
 
 
@@ -37,10 +36,6 @@ class Extension extends Nette\DI\CompilerExtension
 		$builder->getDefinition('nette.userStorage')
 			->setClass('Zenify\Doctrine\Http\UserStorage')
 			->addSetup('setEntity', [$config['userEntity']]);
-
-		$builder->addDefinition($this->prefix('inject.dao.event'))
-			->setClass('Zenify\Doctrine\Events\CallInjectOnDaoCreate')
-			->addTag(Kdyby\Events\DI\EventsExtension::TAG_SUBSCRIBER);
 	}
 
 }

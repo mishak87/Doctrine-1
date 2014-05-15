@@ -5,7 +5,7 @@
  * Copyright (c) 2012 Tomas Votruba (http://tomasvotruba.cz)
  */
 
-namespace Zenify\Doctrine\Http;
+namespace Zenify\Bridge\HttpDoctrine;
 
 use Doctrine\ORM\EntityManager;
 use Nette;
@@ -19,7 +19,6 @@ class UserStorage extends Nette\Http\UserStorage
 
 	/** @var EntityManager */
 	private $entityManager;
-
 
 
 	public function  __construct(Session $session, EntityManager $entityManager)

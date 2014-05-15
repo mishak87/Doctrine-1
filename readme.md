@@ -3,11 +3,7 @@
 
 ## Requirements
 
-This package requires PHP 5.4.
-
-- [Kdyby\Doctrine](http://github.com/kdyby/doctrine)
-- [Kdyby\DoctrineForms](http://github.com/kdyby/doctrineforms)
-- [Kdyby\Validator](http://github.com/kdyby/validator)
+See section `require` in [composer.json](composer.json).
 
 
 ## Installation
@@ -15,7 +11,7 @@ This package requires PHP 5.4.
 The best way to install is using [Composer](http://getcomposer.org/):
 
 ```sh
-$ composer require "zenify/doctrine:@dev"
+$ composer require zenify/doctrine:@dev
 ```
 
 And register the extension in `config.neon`:

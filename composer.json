@@ -10,10 +10,9 @@
 	],
 	"require": {
 		"php": ">=5.4",
-		"nette/nette": "@dev",
+		"nette/http": "~2.2",
 		"kdyby/doctrine": "@dev",
-		"kdyby/doctrine-forms": "@dev",
-		"kdyby/validator": "@dev"
+		"kdyby/doctrine-forms": "dev-master"
 	},
 	"autoload": {
 		"psr-0": {
