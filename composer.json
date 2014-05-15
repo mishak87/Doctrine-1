@@ -11,7 +11,7 @@
 	"require": {
 		"php": ">=5.4",
 		"nette/http": "~2.2",
-		"kdyby/doctrine": "@dev",
+		"kdyby/doctrine": "~2.0",
 		"kdyby/doctrine-forms": "dev-master"
 	},
 	"autoload": {
